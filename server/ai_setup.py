@@ -41,7 +41,7 @@ def template(question):
 
     return json_response
 if __name__ == "__main__":
-    question = 30
+    question = 13
     print(template(question))
 
 

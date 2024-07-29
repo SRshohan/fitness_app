@@ -73,7 +73,6 @@ tenacity==8.5.0
 tokenizers==0.19.1
 torch==2.4.0
 tqdm==4.66.4
-transformers @ git+https://github.com/huggingface/transformers@f7396876849926afa87c9412d67c43618dad403d
 typing_extensions==4.12.2
 uritemplate==4.1.1
 urllib3==1.26.19
