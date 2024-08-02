@@ -41,4 +41,5 @@ def database_authentication():
 
 
 if __name__ == '__main__':
+    database_authentication()
     print("Working")

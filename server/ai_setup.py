@@ -4,6 +4,8 @@ from langchain_google_genai import GoogleGenerativeAI, HarmBlockThreshold, HarmC
 from langchain_core.prompts import PromptTemplate
 from flask import request, Flask, jsonify
 import json
+from langchain.output_parsers import ResponseSchema, StructuredOutputParser
+from langchain_core.prompts import PromptTemplate
 
 
 
@@ -40,9 +42,27 @@ def template(question):
         data['response'] = e
 
     return json_response
+
+def respond():
+    response_schemas = [
+        ResponseSchema(name="schedule", description="Generate list of times that person needs to exercise."),
+        ResponseSchema(name="")
+    ]
+    output_parser = StructuredOutputParser.from_response_schemas(response_schemas)
+    format_instructions = output_parser.get_format_instructions()
+    prompt = PromptTemplate(
+        template="Generate a schedule based on the user's data.\n{format_instructions}\n{user_data}",
+        input_variables=["user_data"],
+        partial_variables={"format_instructions": format_instructions},
+    )
+    llm = load_llm()
+    chain = prompt | llm | output_parser
+    response = chain.invoke({"user_data": "Sample user data"})
+    return response
+
 if __name__ == "__main__":
-    question = 13
-    print(template(question))
+    question = 30
+    print(respond())
 
 
 
