@@ -26,7 +26,6 @@ def load_llm():
 
 
 # Example prompt
-
 def respond():
     response_schemas = [
         ResponseSchema(name="schedule", description="Generate list of times that person needs to exercise."),
