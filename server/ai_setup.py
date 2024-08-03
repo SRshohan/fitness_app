@@ -26,22 +26,6 @@ def load_llm():
 
 
 # Example prompt
-def template(question):
-    data = {}
-
-    prompt = f"Create a daily fitness routine for someone who wants to lose 5 kg in {question} days."
-
-    prompt = PromptTemplate.from_template(prompt)
-
-    try:
-        chain = prompt | load_llm()
-        chain = chain.invoke({"question":question})
-        data['response'] = chain
-        json_response = json.dumps(data, indent=4)
-    except Exception as e:
-        data['response'] = e
-
-    return json_response
 
 def respond():
     response_schemas = [
